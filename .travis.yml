@@ -1,0 +1,26 @@
+sudo: required
+
+services:
+  - docker
+
+language: generic
+
+arch:
+  - amd64
+  - arm64
+  - ppc64le
+  - s390x
+
+os: linux
+
+script:
+  - docker build -t moderras/pmcenter -f ./Dockerfile .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push mmoderras/pmcenter
+
+## use standard notification to committer
+#notifications:
+#    recipients:
+#      - "testautomatisierung@consol.de"
+#    on_success: change # default: change
+#    on_failure: always # default: always

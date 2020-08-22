@@ -16,7 +16,7 @@ os: linux
 script:
   - docker build -t moderras/pmcenter -f ./Dockerfile .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push mmoderras/pmcenter
+  - docker push moderras/pmcenter
 
 ## use standard notification to committer
 #notifications:

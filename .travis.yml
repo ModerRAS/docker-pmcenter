@@ -5,16 +5,10 @@ services:
 
 language: generic
 
-arch:
-  - amd64
-  - arm64
-
-os: linux
-
 script:
-  - docker build -t moderras/pmcenter -f ./Dockerfile .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push moderras/pmcenter
+  - docker build -t moderras/pmcenter -f ./Dockerfile .
+  - docker buildx build --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag moderras/pmcenter:latest .
 
 ## use standard notification to committer
 #notifications:
